@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://b27rlyn6vxklb"]
+[gd_scene load_steps=10 format=4 uid="uid://b27rlyn6vxklb"]
 
 [ext_resource type="Texture2D" uid="uid://bio1fmtpe30t6" path="res://Assets/WinterTileset/svg/Tile.svg" id="1_n3kd2"]
+[ext_resource type="Script" uid="uid://l28idjh6am06" path="res://playermuñeconieve.gd" id="2_da4s4"]
+[ext_resource type="Texture2D" uid="uid://cedr34b6v774w" path="res://Assets/WinterTileset/png/Object/SnowMan.png" id="2_tbqnq"]
+[ext_resource type="Script" uid="uid://cbysb00c0qu21" path="res://cubito.gd" id="4_ugdhi"]
+[ext_resource type="Texture2D" uid="uid://iwj7uph276db" path="res://Assets/WinterTileset/png/Object/Crystal.png" id="5_mnj7i"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbqnq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_da4s4"]
+size = Vector2(86, 92)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_da4s4"]
 texture = ExtResource("1_n3kd2")
 2:0/0 = 0
 3:0/0 = 0
@@ -185,8 +192,11 @@ texture = ExtResource("1_n3kd2")
 33:5/0 = 0
 34:5/0 = 0
 0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:6/0 = 0
 4:6/0 = 0
 5:6/0 = 0
@@ -205,8 +215,11 @@ texture = ExtResource("1_n3kd2")
 28:6/0 = 0
 29:6/0 = 0
 0:7/0 = 0
+0:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:7/0 = 0
+1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:7/0 = 0
+2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:7/0 = 0
 4:7/0 = 0
 5:7/0 = 0
@@ -963,10 +976,50 @@ texture = ExtResource("1_n3kd2")
 34:29/0 = 0
 35:29/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_da4s4"]
-sources/0 = SubResource("TileSetAtlasSource_tbqnq")
+[sub_resource type="TileSet" id="TileSet_n327w"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_da4s4")
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5c16q"]
+size = Vector2(95, 79)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_set = SubResource("TileSet_da4s4")
+[node name="Main" type="Node2D"]
+position = Vector2(340, 275)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(237, 49)
+script = ExtResource("2_da4s4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(0.4326425, 0.43333334)
+texture = ExtResource("2_tbqnq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_da4s4")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Ground" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD3/wYAAAAAAAYAAAD3/wcAAAAAAAcAAAD4/wYAAAABAAYAAAD4/wcAAAABAAcAAAD5/wYAAAACAAYAAAD5/wcAAAACAAcAAAD6/wYAAAAAAAYAAAD6/wcAAAAAAAcAAAD7/wYAAAABAAYAAAD7/wcAAAABAAcAAAD8/wYAAAACAAYAAAD8/wcAAAACAAcAAAD9/wYAAAAAAAYAAAD9/wcAAAAAAAcAAAD+/wYAAAABAAYAAAD+/wcAAAABAAcAAAD//wYAAAACAAYAAAD//wcAAAACAAcAAAAAAAYAAAAAAAYAAAAAAAcAAAAAAAcAAAABAAYAAAABAAYAAAABAAcAAAABAAcAAAACAAYAAAACAAYAAAACAAcAAAACAAcAAAADAAYAAAAAAAYAAAADAAcAAAAAAAcAAAAEAAYAAAABAAYAAAAEAAcAAAABAAcAAAAFAAYAAAACAAYAAAAFAAcAAAACAAcAAAAGAAYAAAAAAAYAAAAGAAcAAAAAAAcAAAAHAAYAAAABAAYAAAAHAAcAAAABAAcAAAAIAAYAAAACAAYAAAAIAAcAAAACAAcAAAAJAAYAAAAAAAYAAAAJAAcAAAAAAAcAAAAKAAYAAAABAAYAAAAKAAcAAAABAAcAAAALAAYAAAACAAYAAAALAAcAAAACAAcAAAAMAAYAAAAAAAYAAAAMAAcAAAAAAAcAAAANAAYAAAABAAYAAAANAAcAAAABAAcAAAAOAAYAAAACAAYAAAAOAAcAAAACAAcAAAAPAAYAAAAAAAYAAAAPAAcAAAAAAAcAAAAQAAYAAAABAAYAAAAQAAcAAAABAAcAAAARAAYAAAACAAYAAAARAAcAAAACAAcAAAASAAYAAAAAAAYAAAASAAcAAAAAAAcAAAATAAYAAAABAAYAAAATAAcAAAABAAcAAAAUAAYAAAACAAYAAAAUAAcAAAACAAcAAAAVAAYAAAAAAAYAAAAVAAcAAAAAAAcAAAAWAAYAAAABAAYAAAAWAAcAAAABAAcAAAAXAAYAAAACAAYAAAAXAAcAAAACAAcAAAAYAAYAAAAAAAYAAAAYAAcAAAAAAAcAAAAZAAYAAAABAAYAAAAZAAcAAAABAAcAAAAaAAYAAAACAAYAAAAaAAcAAAACAAcAAAAbAAYAAAAAAAYAAAAbAAcAAAAAAAcAAAAcAAYAAAABAAYAAAAcAAcAAAABAAcAAAAdAAYAAAAAAAYAAAAdAAcAAAAAAAcAAAAeAAYAAAABAAYAAAAeAAcAAAABAAcAAAAfAAYAAAACAAYAAAAfAAcAAAACAAcAAAAgAAYAAAAAAAYAAAAgAAcAAAAAAAcAAAAhAAYAAAABAAYAAAAhAAcAAAABAAcAAAAiAAYAAAACAAYAAAAiAAcAAAACAAcAAAAjAAYAAAAAAAYAAAAjAAcAAAAAAAcAAAAkAAYAAAABAAYAAAAkAAcAAAABAAcAAAAlAAYAAAACAAYAAAAlAAcAAAACAAcAAAAmAAYAAAAAAAYAAAAmAAcAAAAAAAcAAAAnAAYAAAABAAYAAAAnAAcAAAABAAcAAAAoAAYAAAACAAYAAAAoAAcAAAACAAcAAAApAAYAAAAAAAYAAAApAAcAAAAAAAcAAAAqAAYAAAABAAYAAAAqAAcAAAABAAcAAAArAAYAAAACAAYAAAArAAcAAAACAAcAAAAsAAYAAAAAAAYAAAAsAAcAAAAAAAcAAAAtAAYAAAABAAYAAAAtAAcAAAABAAcAAAAuAAYAAAACAAYAAAAuAAcAAAACAAcAAAAvAAYAAAAAAAYAAAAvAAcAAAAAAAcAAAAwAAYAAAABAAYAAAAwAAcAAAABAAcAAAAxAAYAAAACAAYAAAAxAAcAAAACAAcAAAAyAAYAAAAAAAYAAAAyAAcAAAAAAAcAAAAzAAYAAAABAAYAAAAzAAcAAAABAAcAAAA0AAYAAAACAAYAAAA0AAcAAAACAAcAAAA1AAYAAAAAAAYAAAA1AAcAAAAAAAcAAAA2AAYAAAABAAYAAAA2AAcAAAABAAcAAAA3AAYAAAACAAYAAAA3AAcAAAACAAcAAAA=")
+tile_set = SubResource("TileSet_n327w")
+
+[node name="Cubito" type="Area2D" parent="."]
+position = Vector2(495, 54)
+script = ExtResource("4_ugdhi")
+
+[node name="Sprite2D" type="Sprite2D" parent="Cubito"]
+texture = ExtResource("5_mnj7i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cubito"]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_5c16q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 23.0
+offset_top = 12.0
+offset_right = 27.0
+offset_bottom = 39.0
+max_value = 30.0
