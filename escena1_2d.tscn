@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://b27rlyn6vxklb"]
+[gd_scene load_steps=21 format=4 uid="uid://b27rlyn6vxklb"]
 
 [ext_resource type="Texture2D" uid="uid://byjuv6cld2wsq" path="res://Assets/WinterTileset/png/BG/BG.png" id="1_5c16q"]
 [ext_resource type="Texture2D" uid="uid://bio1fmtpe30t6" path="res://Assets/WinterTileset/svg/Tile.svg" id="1_n3kd2"]
@@ -6,14 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://cedr34b6v774w" path="res://Assets/WinterTileset/png/Object/SnowMan.png" id="2_tbqnq"]
 [ext_resource type="Texture2D" uid="uid://cqt40i18qqvfk" path="res://Assets/kenney_platformer-art-winter/Vector/sheet.svg" id="4_mnj7i"]
 [ext_resource type="Script" uid="uid://cbysb00c0qu21" path="res://Scripts/cubito.gd" id="4_ugdhi"]
+[ext_resource type="PackedScene" uid="uid://ciiy1fdi60ecr" path="res://Prefabs/snowball.tscn" id="5_jl0wd"]
 [ext_resource type="Texture2D" uid="uid://iwj7uph276db" path="res://Assets/WinterTileset/png/Object/Crystal.png" id="5_mnj7i"]
 [ext_resource type="Script" uid="uid://dxwrkha2imbth" path="res://Scripts/enemy.gd" id="8_4qkjy"]
 [ext_resource type="Texture2D" uid="uid://dmi3bkcvtgkrg" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Enemies/Default/slime_fire_walk_a.png" id="8_52qrh"]
 [ext_resource type="Texture2D" uid="uid://u82mfvhveqwy" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Enemies/Default/slime_fire_walk_b.png" id="9_4qkjy"]
 [ext_resource type="Texture2D" uid="uid://cc301b0d0hixe" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Enemies/Default/slime_fire_flat.png" id="10_jl0wd"]
 [ext_resource type="Texture2D" uid="uid://7nq1tob4tqoc" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Enemies/Default/slime_fire_rest.png" id="11_syimi"]
-[ext_resource type="Script" uid="uid://dbtqg4h8nvggu" path="res://snowball.gd" id="13_jl0wd"]
-[ext_resource type="Texture2D" uid="uid://flkb1wajtbjx" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Tiles/Default/bomb_active.png" id="14_syimi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_da4s4"]
 texture = ExtResource("1_n3kd2")
@@ -2657,7 +2656,6 @@ radius = 20.996277
 height = 53.99243
 
 [node name="Main" type="Node2D"]
-position = Vector2(340, 275)
 
 [node name="Bg" type="Sprite2D" parent="."]
 position = Vector2(238.74588, 49.125004)
@@ -2690,6 +2688,7 @@ tile_set = SubResource("TileSet_n327w")
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(237, 51)
 script = ExtResource("2_da4s4")
+SnowballScene = ExtResource("5_jl0wd")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 scale = Vector2(0.4326425, 0.43333334)
@@ -2736,12 +2735,3 @@ frame_progress = 0.35610786
 position = Vector2(0, 10)
 rotation = -1.567179
 shape = SubResource("CapsuleShape2D_4qkjy")
-
-[node name="Bola" type="Area2D" parent="."]
-position = Vector2(-435, 374)
-script = ExtResource("13_jl0wd")
-
-[node name="Sprite2D" type="Sprite2D" parent="Bola"]
-texture = ExtResource("14_syimi")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bola"]

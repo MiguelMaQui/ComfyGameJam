@@ -1,24 +1,23 @@
 extends CharacterBody2D
 
-@export var daño_tiempo: int = 3
-@export var velocidad: float = 80.0
-@export var gravedad: float = 1200.0
-@export var rango_patruya: float = 200.0
-@export var pausa_en_giro: float = 0.2
-@export var hit_cooldown: float = 0.6
+@export var velocidad := 80.0
+@export var gravedad := 1200.0
+@export var rango_patruya := 200.0
+@export var pausa_en_giro := 0.2
+@export var daño_tiempo := 3
+@export var hit_cooldown := 0.6
 
-var _dir: int = -1 # empieza a la izquierda
-var _origen_x: float = 0.0
-var _pausa_timer: float = 0.0
-var _hit_timer: float = 0.0
+var direccion := -1 # empieza a la izquierda
+var origen_x := 0.0
+var pausa_timer := 0.0
+var hit_timer := 0.0
 
-@onready var _anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
-	_origen_x = global_position.x
-	if _anim.sprite_frames.has_animation("walk"):
-		_anim.play("walk")
-	_update_flip()
+	origen_x = global_position.x
+	sprite.play("walk")
+	_actualizar_flip()
 
 func _physics_process(delta: float) -> void:
 	# GRAVEDAD
@@ -27,53 +26,47 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = 0
 
-	# PATRULLA CORREGIDA
-	if _pausa_timer > 0.0:
-		_pausa_timer -= delta
+	# PATRULLA
+	if pausa_timer > 0:
+		pausa_timer -= delta
 		velocity.x = 0
 	else:
-		velocity.x = _dir * velocidad
+		velocity.x = direccion * velocidad
 
-		# comprobamos SOLO cuando vamos a salir del rango
-		if _dir < 0 and global_position.x <= _origen_x - rango_patruya:
-			global_position.x = _origen_x - rango_patruya
+		if direccion < 0 and global_position.x <= origen_x - rango_patruya:
+			global_position.x = origen_x - rango_patruya
 			_girar()
-		elif _dir > 0 and global_position.x >= _origen_x + rango_patruya:
-			global_position.x = _origen_x + rango_patruya
+		elif direccion > 0 and global_position.x >= origen_x + rango_patruya:
+			global_position.x = origen_x + rango_patruya
 			_girar()
 
 	move_and_slide()
 
-	_aplicar_daño_por_colision()
+	_aplicar_daño()
 
-	if _hit_timer > 0.0:
-		_hit_timer -= delta
+	if hit_timer > 0:
+		hit_timer -= delta
 
 func _girar() -> void:
-	_dir *= -1
-	_pausa_timer = pausa_en_giro
-	_update_flip()
+	direccion *= -1
+	pausa_timer = pausa_en_giro
+	_actualizar_flip()
 
-func _update_flip() -> void:
-	# sprite mira a la izquierda por defecto
-	_anim.flip_h = (_dir > 0)
+func _actualizar_flip() -> void:
+	# sprite MIRA A LA IZQUIERDA por defecto
+	sprite.flip_h = (direccion > 0)
 
-func _aplicar_daño_por_colision() -> void:
-	if _hit_timer > 0.0:
+func _aplicar_daño() -> void:
+	if hit_timer > 0:
 		return
 
 	for i in get_slide_collision_count():
-		var col := get_slide_collision(i)
-		if col and col.get_collider().has_method("sumar_tiempo"):
-			col.get_collider().sumar_tiempo(-daño_tiempo)
-			_hit_timer = hit_cooldown
+		var col = get_slide_collision(i)
+		var body = col.get_collider()
+		if body and body.has_method("sumar_tiempo"):
+			body.sumar_tiempo(-daño_tiempo)
+			hit_timer = hit_cooldown
 			return
-			
-func _morir() -> void:
-	# Reproduce animación/sonido, luego destruye
-	# Si tienes animaciones:
-	if _anim and _anim.sprite_frames.has_animation("die"):
-		_anim.play("die")
-		# esperar a que termine la animación antes de queue_free() (opcional)
-		# para simplificar la matamos inmediatamente:
+
+func recibir_impacto() -> void:
 	queue_free()
