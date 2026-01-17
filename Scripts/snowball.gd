@@ -21,4 +21,11 @@ func _on_body_entered(body: Node) -> void:
 	
 	if body.has_method("recibir_impacto"):
 		body.recibir_impacto()
+		velocidad = 0 # Detenemos la bola
+		$Sprite2D.visible = false
+		$CollisionShape2D.set_deferred("disabled", true)
+		
+	$SFX_Impacto.play()
+	await $SFX_Impacto.finished # Esperamos al sonido
+		
 	queue_free()

@@ -14,6 +14,9 @@ var derretir_vel := 1.0
 # Opcional: Si añades un nodo Label dentro del CanvasLayer y lo llamas "LabelTiempo"
 @onready var texto_tiempo = get_tree().root.find_child("LabelTiempo", true, false)
 
+@onready var sfx_disparo = $SFX_Disparo
+@onready var sfx_muerte = $SFX_Muerte
+
 # =========================
 # NUEVO ↓↓↓
 # =========================
@@ -22,6 +25,11 @@ var derretir_vel := 1.0
 
 @onready var sprite: Sprite2D = $Sprite2D
 # =========================
+
+func _ready():
+	# Carga la música del nivel (si es distinta)
+	var musica = load("res://Sonidos/festive-winter-music-451671.mp3")
+	MusicManager.reproducir(musica)
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -76,8 +84,18 @@ func sumar_tiempo(cantidad):
 	tiempo = min(tiempo, tiempo_max)
 
 func morir():
+	set_physics_process(false)
+	set_process(false)
+	
+	if sprite:
+		sprite.visible = false # Ocultamos el muñeco visualmente
+
+	sfx_muerte.play()
+	
 	# Podrías añadir un efecto de sonido de "agua" antes de reiniciar
-	get_tree().reload_current_scene()
+	await sfx_muerte.finished
+	# await get_tree().create_timer(1.0).timeout
+	get_tree().change_scene_to_file("res://Escenas/game_over.tscn")
 
 # =========================
 # NUEVO ↓↓↓ (función de disparo)
@@ -85,6 +103,8 @@ func morir():
 func disparar():
 	if SnowballScene == null:
 		return
+	sfx_disparo.pitch_scale = randf_range(0.8, 1.2) 
+	sfx_disparo.play()
 
 	var bola = SnowballScene.instantiate()
 

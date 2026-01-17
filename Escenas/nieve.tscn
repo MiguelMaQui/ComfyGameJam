@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://djku5sfaby4yb"]
+
+[sub_resource type="Gradient" id="Gradient_7innc"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x1wq7"]
+gradient = SubResource("Gradient_7innc")
+width = 6
+height = 6
+fill = 1
+fill_from = Vector2(0.5, 0.47008547)
+fill_to = Vector2(0.71794873, 0.25213677)
+
+[node name="Nieve" type="CPUParticles2D"]
+position = Vector2(958, 0)
+amount = 200
+texture = SubResource("GradientTexture2D_x1wq7")
+lifetime = 4.5
+preprocess = 5.0
+emission_shape = 3
+emission_rect_extents = Vector2(950, 10)
+gravity = Vector2(0, 50)
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+scale_amount_max = 3.0
