@@ -1,18 +1,19 @@
 [gd_scene load_steps=5 format=3 uid="uid://ciiy1fdi60ecr"]
 
 [ext_resource type="Script" uid="uid://dbtqg4h8nvggu" path="res://Scripts/snowball.gd" id="1_i8p5v"]
-[ext_resource type="Texture2D" uid="uid://flkb1wajtbjx" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Tiles/Default/bomb_active.png" id="2_bt015"]
+[ext_resource type="Texture2D" uid="uid://drd6tjkk08p02" path="res://Assets/kenney_platformer-art-winter/Tiles/snowBall.png" id="2_bvfhu"]
 [ext_resource type="AudioStream" uid="uid://del36lj2otd0y" path="res://Sonidos/cig_extinguish-89851.mp3" id="3_bvfhu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_srvs4"]
-radius = 15.0
+radius = 13.152946
 
 [node name="Bola" type="Area2D"]
 script = ExtResource("1_i8p5v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5625, 0.5625)
-texture = ExtResource("2_bt015")
+position = Vector2(1.499999, 2.000002)
+scale = Vector2(0.95714283, 0.8285713)
+texture = ExtResource("2_bvfhu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 3)
