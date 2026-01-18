@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://celr34lxtrdk4"]
+
+[ext_resource type="Script" uid="uid://dxwrkha2imbth" path="res://Scripts/enemy.gd" id="1_n7q57"]
+[ext_resource type="Texture2D" uid="uid://dmi3bkcvtgkrg" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Enemies/Default/slime_fire_walk_a.png" id="2_80imi"]
+[ext_resource type="Texture2D" uid="uid://u82mfvhveqwy" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Enemies/Default/slime_fire_walk_b.png" id="3_osttl"]
+[ext_resource type="Texture2D" uid="uid://cc301b0d0hixe" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Enemies/Default/slime_fire_flat.png" id="4_g7nnu"]
+[ext_resource type="Texture2D" uid="uid://7nq1tob4tqoc" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Enemies/Default/slime_fire_rest.png" id="5_kuc4i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5egr8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_80imi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_osttl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g7nnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_osttl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kuc4i")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bm2cm"]
+radius = 20.996277
+height = 53.99243
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_n7q57")
+rango_patruya = 300.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5egr8")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+rotation = -1.567179
+shape = SubResource("CapsuleShape2D_bm2cm")

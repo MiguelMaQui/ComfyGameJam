@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdj2xw4x6pcu1"]
+
+[ext_resource type="Script" uid="uid://cbysb00c0qu21" path="res://Scripts/cubito.gd" id="1_t1for"]
+[ext_resource type="Texture2D" uid="uid://iwj7uph276db" path="res://Assets/WinterTileset/png/Object/Crystal.png" id="2_om10v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhs4x"]
+size = Vector2(95, 79)
+
+[node name="Cubito" type="Area2D"]
+script = ExtResource("1_t1for")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_om10v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_lhs4x")
