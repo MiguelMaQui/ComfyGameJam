@@ -64,7 +64,8 @@ func _aplicar_daño() -> void:
 		var col = get_slide_collision(i)
 		var body = col.get_collider()
 		if body and body.has_method("sumar_tiempo"):
-			body.sumar_tiempo(-daño_tiempo)
+			# El "true" final activa el sonido en el player
+			body.sumar_tiempo(-daño_tiempo, true)
 			hit_timer = hit_cooldown
 			return
 

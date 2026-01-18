@@ -16,6 +16,7 @@ var derretir_vel := 1.0
 
 @onready var sfx_disparo = $SFX_Disparo
 @onready var sfx_muerte = $SFX_Muerte
+@onready var sfx_impacto = $SFX_Impacto
 
 # =========================
 # NUEVO ↓↓↓
@@ -57,13 +58,28 @@ func _process(delta):
 	# Restamos tiempo
 	tiempo -= derretir_vel * delta
 	
-	# Actualizamos la barra
+	# Evitamos que el tiempo baje de 0 visualmente (para que no ponga -00:01 antes de morir)
+	var tiempo_visual = max(0.0, tiempo)
+	
+# Actualizamos la barra (visual)
 	if barra_tiempo:
-		barra_tiempo.value = tiempo
+		barra_tiempo.value = tiempo_visual
 		
-	# NUEVO: Actualizamos el texto para dar más presión (ej: "00:25")
+# ==========================================
+	# NUEVO: Formato de Reloj (Minutos:Segundos)
+	# ==========================================
 	if texto_tiempo:
-		texto_tiempo.text = str(ceil(tiempo)) + "s" # ceil redondea hacia arriba para no mostrar decimales feos
+		# 1. Calculamos los minutos (división entera entre 60)
+		var minutos: int = int(tiempo_visual) / 60
+		
+		# 2. Calculamos los segundos restantes (el resto de la división)
+		var segundos: int = int(tiempo_visual) % 60
+		
+		# 3. Creamos el texto con formato
+		# "%02d" significa: "Pon un número entero de 2 dígitos. Si es menor de 10, pon un 0 delante".
+		texto_tiempo.text = "%02d:%02d" % [minutos, segundos]
+	
+	# ==========================================
 
 	# Escala visual (la presión de ver cómo desaparece)
 	var escala = clamp(tiempo / 30.0, 0.4, 1.0)
@@ -78,9 +94,31 @@ func _process(delta):
 		disparar()
 	# =========================
 
-func sumar_tiempo(cantidad):
+# Añadimos el parámetro "es_dano_real" que por defecto es falso
+func sumar_tiempo(cantidad, es_dano_real := false):
+	
+	# BLOQUE DE PERDER TIEMPO (Disparo o Daño)
+	if cantidad < 0:
+		# 1. FEEDBACK VISUAL (Siempre ocurre: Disparo y Daño)
+		if sprite:
+			sprite.modulate = Color(1, 0, 0) # Rojo
+			var tween = create_tween()
+			tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.2) # Volver a normal
+
+		# 2. FEEDBACK SONORO (Solo ocurre si es daño real de enemigo)
+		if es_dano_real:
+			sfx_impacto.pitch_scale = randf_range(0.9, 1.1)
+			sfx_impacto.play()
+		
+	# BLOQUE DE GANAR TIEMPO (Recoger cubitos)
+	if cantidad > 0:
+		if sprite:
+			sprite.modulate = Color(0.135, 0.561, 0.852, 1.0) # Azul
+			var tween = create_tween()
+			tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.2)
+
 	tiempo += cantidad
-	# Limitamos al máximo para que no sea demasiado fácil
+	# Limitamos al máximo
 	tiempo = min(tiempo, tiempo_max)
 
 func morir():
