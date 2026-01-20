@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bdfj4arcxglob"]
 
-[ext_resource type="Script" uid="uid://bmdm7kbat4uuk" path="res://Scripts/game_over.gd" id="1_vff8i"]
+[ext_resource type="Script" uid="uid://co1681i871kjs" path="res://Scripts/win.gd" id="1_vff8i"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mkivq"]
 font_size = 35
 
-[node name="GameOver" type="Control"]
+[node name="Win" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +18,7 @@ script = ExtResource("1_vff8i")
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
-color = Color(0.026549187, 0.36338937, 0.415854, 1)
+color = Color(0, 0.54485846, 0.3607535, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -28,7 +28,7 @@ offset_right = 1142.0
 offset_bottom = 673.0
 alignment = 1
 
-[node name="TEXTderretido" type="Label" parent="VBoxContainer"]
+[node name="TEXTwin" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "¡Has llegado!"
 label_settings = SubResource("LabelSettings_mkivq")
@@ -36,10 +36,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="BotonReintentar" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Intentalo de nuevo"
-
 [node name="BotonMenu" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Menu"
+
+[node name="BotonSalir" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Salir"
