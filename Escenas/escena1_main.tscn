@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://b27rlyn6vxklb"]
+[gd_scene load_steps=31 format=4 uid="uid://b27rlyn6vxklb"]
 
 [ext_resource type="Texture2D" uid="uid://byjuv6cld2wsq" path="res://Assets/WinterTileset/png/BG/BG.png" id="1_u7o0j"]
 [ext_resource type="Texture2D" uid="uid://bio1fmtpe30t6" path="res://Assets/WinterTileset/svg/Tile.svg" id="2_q35fh"]
@@ -2663,30 +2663,6 @@ size = Vector2(254, 70)
 
 [sub_resource type="Animation" id="Animation_75ldo"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2096, 245)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Plataforma2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(215, -196)]
-}
 
 [sub_resource type="Animation" id="Animation_lr1tv"]
 resource_name = "mover"
@@ -2717,17 +2693,21 @@ tracks/1/keys = {
 "values": [Vector2(230, -196), Vector2(230, -368), Vector2(230, -507)]
 }
 
+[sub_resource type="Animation" id="Animation_gj47h"]
+resource_name = "subir"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_75ldo"]
 _data = {
 &"RESET": SubResource("Animation_75ldo"),
-&"mover": SubResource("Animation_lr1tv")
+&"mover": SubResource("Animation_lr1tv"),
+&"subir": SubResource("Animation_gj47h")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u7o0j"]
 size = Vector2(193, 81)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hhlyv"]
-size = Vector2(86, 92)
+size = Vector2(84, 91)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gj47h"]
 font_color = Color(0, 0, 0, 1)
@@ -2777,7 +2757,7 @@ autoplay = "mover"
 position = Vector2(4, -99)
 
 [node name="Plataforma2" type="AnimatableBody2D" parent="Ground"]
-position = Vector2(215, -196)
+position = Vector2(230, -196)
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground/Plataforma2"]
 position = Vector2(-6.999998, 2.000002)
@@ -2798,7 +2778,7 @@ autoplay = "mover"
 position = Vector2(-6, -106)
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(-214, 95)
+position = Vector2(-214, 99)
 script = ExtResource("5_a430x")
 SnowballScene = ExtResource("6_43bxu")
 
@@ -2807,7 +2787,7 @@ scale = Vector2(0.4326425, 0.43333334)
 texture = ExtResource("7_u17ge")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-1, 0)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_hhlyv")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]

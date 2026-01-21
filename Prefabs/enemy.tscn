@@ -33,7 +33,7 @@ animations = [{
 radius = 20.996277
 height = 53.99243
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_n7q57")
 rango_patruya = 300.0
 

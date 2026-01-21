@@ -7,6 +7,7 @@
 size = Vector2(95, 79)
 
 [node name="Cubito" type="Area2D"]
+z_index = -1
 script = ExtResource("1_t1for")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
