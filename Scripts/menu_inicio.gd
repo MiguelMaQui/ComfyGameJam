@@ -4,6 +4,7 @@ func _ready():
 	# Conectamos las señales de los botones
 	$VBoxContainer/BotonJugar.pressed.connect(_on_jugar_pressed)
 	$VBoxContainer/BotonSalir.pressed.connect(_on_salir_pressed)
+	$BotonCreditos.pressed.connect(_on_creditos_pressed)
 	
 	# Carga la música del menú
 	var musica = load("res://Sonidos/festive-winter-music-451671.mp3")
@@ -12,6 +13,11 @@ func _ready():
 func _on_jugar_pressed():
 	# CAMBIA "res://world.tscn" POR LA RUTA DE TU NIVEL DE JUEGO
 	get_tree().change_scene_to_file("res://Escenas/escena1_main.tscn")
+	
+func _on_creditos_pressed():
+	# CAMBIA "res://world.tscn" POR LA RUTA DE TU NIVEL DE JUEGO
+	get_tree().change_scene_to_file("res://Escenas/creditos.tscn")
+
 
 func _on_salir_pressed():
 	get_tree().quit()
