@@ -24,13 +24,18 @@ var derretir_vel := 1.0
 @export var SnowballScene: PackedScene
 @export var tiempo_por_disparo := 2.5
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 # =========================
 
 func _ready():
 	# Carga la música del nivel (si es distinta)
 	var musica = load("res://Sonidos/festive-winter-music-451671.mp3")
-	MusicManager.reproducir(musica)
+	if MusicManager:
+		MusicManager.reproducir(musica)
+		
+	# Arrancamos con la animación de estar quieto
+	if anim:
+		anim.play("idle")
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -47,12 +52,25 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+# =========================
+	# NUEVA LÓGICA DE ANIMACIÓN
 	# =========================
-	# NUEVO ↓↓↓ (flip del sprite)
-	# El sprite mira a la DERECHA por defecto
-	if sprite and direction != 0:
-		sprite.flip_h = direction < 0
-	# =========================
+	if anim:
+		# 1. Gestionar el Flip (Mirar izquierda/derecha)
+		if direction != 0:
+			anim.flip_h = direction < 0
+			
+		# 2. Gestionar qué animación suena
+		# Si nos estamos moviendo (velocity.x no es 0) -> Walk
+		if velocity.x != 0:
+			anim.play("walk")
+		else:
+			# Si estamos parados -> Idle
+			anim.play("idle")
+		
+		# (Opcional) Si tuvieras animación de salto, podrías ponerla aquí:
+		# if not is_on_floor():
+		# 	anim.play("jump")
 
 func _process(delta):
 	# Restamos tiempo
@@ -100,22 +118,23 @@ func sumar_tiempo(cantidad, es_dano_real := false):
 	# BLOQUE DE PERDER TIEMPO (Disparo o Daño)
 	if cantidad < 0:
 		# 1. FEEDBACK VISUAL (Siempre ocurre: Disparo y Daño)
-		if sprite:
-			sprite.modulate = Color(1, 0, 0) # Rojo
+		if anim:
+			anim.modulate = Color(1, 0, 0) # Rojo
 			var tween = create_tween()
-			tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.2) # Volver a normal
+			tween.tween_property(anim, "modulate", Color(1, 1, 1), 0.2) # Volver a normal
 
 		# 2. FEEDBACK SONORO (Solo ocurre si es daño real de enemigo)
 		if es_dano_real:
-			sfx_impacto.pitch_scale = randf_range(0.9, 1.1)
-			sfx_impacto.play()
+			if sfx_impacto:
+				sfx_impacto.pitch_scale = randf_range(0.9, 1.1)
+				sfx_impacto.play()
 		
 	# BLOQUE DE GANAR TIEMPO (Recoger cubitos)
 	if cantidad > 0:
-		if sprite:
-			sprite.modulate = Color(0.135, 0.561, 0.852, 1.0) # Azul
+		if anim:
+			anim.modulate = Color(0.135, 0.561, 0.852, 1.0) # Azul
 			var tween = create_tween()
-			tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.2)
+			tween.tween_property(anim, "modulate", Color(1, 1, 1), 0.2)
 
 	tiempo += cantidad
 	# Limitamos al máximo
@@ -125,13 +144,12 @@ func morir():
 	set_physics_process(false)
 	set_process(false)
 	
-	if sprite:
-		sprite.visible = false # Ocultamos el muñeco visualmente
-
-	sfx_muerte.play()
+	if anim:
+		anim.visible = false # Ocultamos el muñeco visualmente
 	
-	# Podrías añadir un efecto de sonido de "agua" antes de reiniciar
-	await sfx_muerte.finished
+	if sfx_muerte:
+		sfx_muerte.play()
+		await sfx_muerte.finished
 	# await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("res://Escenas/game_over.tscn")
 
@@ -141,14 +159,16 @@ func morir():
 func disparar():
 	if SnowballScene == null:
 		return
-	sfx_disparo.pitch_scale = randf_range(0.8, 1.2) 
-	sfx_disparo.play()
+	
+	if sfx_disparo:
+		sfx_disparo.pitch_scale = randf_range(0.8, 1.2) 
+		sfx_disparo.play()
 
 	var bola = SnowballScene.instantiate()
 
-	# Dirección según el flip del sprite
+# Dirección según el flip del AnimatedSprite2D
 	var dir := 1
-	if sprite and sprite.flip_h:
+	if anim and anim.flip_h:
 		dir = -1
 
 	bola.global_position = global_position + Vector2(16 * dir, -4)

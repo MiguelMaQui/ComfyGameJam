@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://b1ba7nqsn8ne1"]
+[gd_scene load_steps=48 format=4 uid="uid://b1ba7nqsn8ne1"]
 
 [ext_resource type="Texture2D" uid="uid://bke16a1uqpad1" path="res://Assets/BG/House-background.jpg" id="1_pdu11"]
 [ext_resource type="Texture2D" uid="uid://bio1fmtpe30t6" path="res://Assets/WinterTileset/svg/Tile.svg" id="2_bvew7"]
@@ -7,16 +7,29 @@
 [ext_resource type="Script" uid="uid://l28idjh6am06" path="res://Scripts/playermuñeconieve.gd" id="4_ensig"]
 [ext_resource type="Texture2D" uid="uid://b0kvnsgq6no83" path="res://Assets/kenney_new-platformer-pack-1.1/Vector/Tiles/block_empty.svg" id="5_pdu11"]
 [ext_resource type="PackedScene" uid="uid://ciiy1fdi60ecr" path="res://Prefabs/snowball.tscn" id="5_xda0y"]
-[ext_resource type="Texture2D" uid="uid://cedr34b6v774w" path="res://Assets/WinterTileset/png/Object/SnowMan.png" id="6_if7xp"]
 [ext_resource type="AudioStream" uid="uid://d0jdlrmr3llpn" path="res://Sonidos/snowball-hit-01-279699.mp3" id="7_uyp6i"]
+[ext_resource type="Texture2D" uid="uid://d0fnhxltl63di" path="res://Assets/Snowman/Idle/0000.png" id="8_dk33t"]
 [ext_resource type="AudioStream" uid="uid://ctjllho1hxdvb" path="res://Sonidos/water-noises-446981.mp3" id="8_xg46x"]
 [ext_resource type="AudioStream" uid="uid://del36lj2otd0y" path="res://Sonidos/cig_extinguish-89851.mp3" id="9_a0vj7"]
+[ext_resource type="Texture2D" uid="uid://b34o7e4ve8fhr" path="res://Assets/Snowman/Idle/0001.png" id="9_gmxvf"]
+[ext_resource type="Texture2D" uid="uid://cfg8abscphvwe" path="res://Assets/Snowman/Idle/0002.png" id="10_222mu"]
 [ext_resource type="Script" uid="uid://bcclky7hmb6cb" path="res://Scripts/portal.gd" id="10_12374"]
+[ext_resource type="Texture2D" uid="uid://cjtldva5iyed3" path="res://Assets/Snowman/Idle/0003.png" id="11_3ahxs"]
 [ext_resource type="Texture2D" uid="uid://jeow1rbxr0r2" path="res://Assets/Neverita.png" id="11_vvm0f"]
+[ext_resource type="Texture2D" uid="uid://cu3di3vdf67jd" path="res://Assets/Snowman/Idle/0004.png" id="12_jyuuj"]
+[ext_resource type="Texture2D" uid="uid://405hafny133s" path="res://Assets/Snowman/Idle/0005.png" id="13_fqc6n"]
 [ext_resource type="PackedScene" uid="uid://celr34lxtrdk4" path="res://Prefabs/enemy.tscn" id="14_vvm0f"]
+[ext_resource type="Texture2D" uid="uid://cxrvnh3n5gvoi" path="res://Assets/Snowman/Idle/0006.png" id="14_x6qsn"]
 [ext_resource type="PackedScene" uid="uid://bdj2xw4x6pcu1" path="res://Prefabs/cubito.tscn" id="15_6mlct"]
+[ext_resource type="Texture2D" uid="uid://b62wbryfrharr" path="res://Assets/Snowman/Walk/0000.png" id="15_m5cwu"]
+[ext_resource type="Texture2D" uid="uid://wm30q2mxs0b8" path="res://Assets/Snowman/Walk/0001.png" id="16_xx6c6"]
+[ext_resource type="Texture2D" uid="uid://de5hgck6combf" path="res://Assets/Snowman/Walk/0002.png" id="17_p5rmm"]
 [ext_resource type="PackedScene" uid="uid://cwawf6tgto00t" path="res://Escenas/menu_pausa.tscn" id="17_vmtyf"]
+[ext_resource type="Texture2D" uid="uid://c4qx5h6bkcfic" path="res://Assets/Snowman/Walk/0003.png" id="18_nd41p"]
+[ext_resource type="Texture2D" uid="uid://cd51jvqosy0uv" path="res://Assets/Snowman/Walk/0004.png" id="19_45xe0"]
 [ext_resource type="Script" uid="uid://bbng70a5lmx4o" path="res://Scripts/killzone.gd" id="19_twjew"]
+[ext_resource type="Texture2D" uid="uid://qs8yp0a07qts" path="res://Assets/Snowman/Walk/0005.png" id="20_xf4ko"]
+[ext_resource type="Texture2D" uid="uid://cjkd1bp8vlkm6" path="res://Assets/Snowman/Walk/0006.png" id="21_yty1k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wxj0w"]
 texture = ExtResource("2_bvew7")
@@ -7463,6 +7476,21 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pdu11"]
 size = Vector2(108, 64)
 
+[sub_resource type="Animation" id="Animation_twjew"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1012, 284)]
+}
+
 [sub_resource type="Animation" id="Animation_a0vj7"]
 resource_name = "parriba"
 length = 3.0
@@ -7480,29 +7508,70 @@ tracks/0/keys = {
 "values": [Vector2(1012, 304), Vector2(1012, 52)]
 }
 
-[sub_resource type="Animation" id="Animation_twjew"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1012, 284)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_plog8"]
 _data = {
 &"RESET": SubResource("Animation_twjew"),
 &"parriba": SubResource("Animation_a0vj7")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_da4s4"]
-size = Vector2(84, 91)
+[sub_resource type="SpriteFrames" id="SpriteFrames_gbsfk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_dk33t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gmxvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_222mu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3ahxs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_jyuuj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fqc6n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_x6qsn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_m5cwu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xx6c6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_p5rmm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_nd41p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_45xe0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_xf4ko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_yty1k")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ljlwn"]
+radius = 29.0
+height = 126.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6mlct"]
 radius = 22.0
@@ -7570,18 +7639,20 @@ libraries = {
 autoplay = "parriba"
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(-306, -352)
+position = Vector2(-306, -350)
 script = ExtResource("4_ensig")
 SnowballScene = ExtResource("5_xda0y")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(-1, 1)
-scale = Vector2(0.4326425, 0.43333334)
-texture = ExtResource("6_if7xp")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(5.5, -23)
+scale = Vector2(0.8773583, 0.92105263)
+sprite_frames = SubResource("SpriteFrames_gbsfk")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-1, 0.5)
-shape = SubResource("RectangleShape2D_da4s4")
+position = Vector2(7, -18)
+shape = SubResource("CapsuleShape2D_ljlwn")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 

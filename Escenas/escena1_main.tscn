@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://b27rlyn6vxklb"]
+[gd_scene load_steps=45 format=4 uid="uid://b27rlyn6vxklb"]
 
 [ext_resource type="Texture2D" uid="uid://byjuv6cld2wsq" path="res://Assets/WinterTileset/png/BG/BG.png" id="1_u7o0j"]
 [ext_resource type="Texture2D" uid="uid://bio1fmtpe30t6" path="res://Assets/WinterTileset/svg/Tile.svg" id="2_q35fh"]
@@ -6,17 +6,30 @@
 [ext_resource type="Texture2D" uid="uid://cgj8miufeoj0r" path="res://Assets/kenney_platformer-art-winter/Tiles/iceBlockHalfAlt.png" id="4_fmsnw"]
 [ext_resource type="Script" uid="uid://l28idjh6am06" path="res://Scripts/playermuñeconieve.gd" id="5_a430x"]
 [ext_resource type="PackedScene" uid="uid://ciiy1fdi60ecr" path="res://Prefabs/snowball.tscn" id="6_43bxu"]
-[ext_resource type="Texture2D" uid="uid://cedr34b6v774w" path="res://Assets/WinterTileset/png/Object/SnowMan.png" id="7_u17ge"]
+[ext_resource type="Texture2D" uid="uid://d0fnhxltl63di" path="res://Assets/Snowman/Idle/0000.png" id="8_c4kbl"]
 [ext_resource type="AudioStream" uid="uid://d0jdlrmr3llpn" path="res://Sonidos/snowball-hit-01-279699.mp3" id="8_n83t7"]
 [ext_resource type="AudioStream" uid="uid://ctjllho1hxdvb" path="res://Sonidos/water-noises-446981.mp3" id="9_l6sej"]
+[ext_resource type="Texture2D" uid="uid://b34o7e4ve8fhr" path="res://Assets/Snowman/Idle/0001.png" id="9_mpfnq"]
 [ext_resource type="AudioStream" uid="uid://del36lj2otd0y" path="res://Sonidos/cig_extinguish-89851.mp3" id="10_cfsaa"]
+[ext_resource type="Texture2D" uid="uid://cfg8abscphvwe" path="res://Assets/Snowman/Idle/0002.png" id="10_hxm63"]
+[ext_resource type="Texture2D" uid="uid://cjtldva5iyed3" path="res://Assets/Snowman/Idle/0003.png" id="11_1cf0c"]
 [ext_resource type="PackedScene" uid="uid://bdj2xw4x6pcu1" path="res://Prefabs/cubito.tscn" id="11_qnbla"]
 [ext_resource type="PackedScene" uid="uid://celr34lxtrdk4" path="res://Prefabs/enemy.tscn" id="12_4hjp4"]
+[ext_resource type="Texture2D" uid="uid://cu3di3vdf67jd" path="res://Assets/Snowman/Idle/0004.png" id="12_sp2qr"]
+[ext_resource type="Texture2D" uid="uid://405hafny133s" path="res://Assets/Snowman/Idle/0005.png" id="13_43ybk"]
+[ext_resource type="Texture2D" uid="uid://cxrvnh3n5gvoi" path="res://Assets/Snowman/Idle/0006.png" id="14_esicy"]
+[ext_resource type="Texture2D" uid="uid://b62wbryfrharr" path="res://Assets/Snowman/Walk/0000.png" id="15_ovqil"]
+[ext_resource type="Texture2D" uid="uid://wm30q2mxs0b8" path="res://Assets/Snowman/Walk/0001.png" id="16_1xheo"]
 [ext_resource type="Texture2D" uid="uid://cdblx6mdek3d3" path="res://Assets/casainvierno.png" id="16_4hjp4"]
 [ext_resource type="Script" uid="uid://bcclky7hmb6cb" path="res://Scripts/portal.gd" id="16_gj47h"]
+[ext_resource type="Texture2D" uid="uid://de5hgck6combf" path="res://Assets/Snowman/Walk/0002.png" id="17_8xmui"]
 [ext_resource type="PackedScene" uid="uid://djku5sfaby4yb" path="res://Escenas/nieve.tscn" id="18_esicy"]
+[ext_resource type="Texture2D" uid="uid://c4qx5h6bkcfic" path="res://Assets/Snowman/Walk/0003.png" id="18_mrhri"]
+[ext_resource type="Texture2D" uid="uid://cd51jvqosy0uv" path="res://Assets/Snowman/Walk/0004.png" id="19_gc7pu"]
 [ext_resource type="PackedScene" uid="uid://cwawf6tgto00t" path="res://Escenas/menu_pausa.tscn" id="19_ovqil"]
+[ext_resource type="Texture2D" uid="uid://qs8yp0a07qts" path="res://Assets/Snowman/Walk/0005.png" id="20_oqjh4"]
 [ext_resource type="Script" uid="uid://bbng70a5lmx4o" path="res://Scripts/killzone.gd" id="20_q35fh"]
+[ext_resource type="Texture2D" uid="uid://cjkd1bp8vlkm6" path="res://Assets/Snowman/Walk/0006.png" id="21_08na1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wxj0w"]
 texture = ExtResource("2_q35fh")
@@ -2706,8 +2719,64 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u7o0j"]
 size = Vector2(193, 81)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhlyv"]
-size = Vector2(84, 91)
+[sub_resource type="SpriteFrames" id="SpriteFrames_13alt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_c4kbl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mpfnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_hxm63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1cf0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_sp2qr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_43ybk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_esicy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_ovqil")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_1xheo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_8xmui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_mrhri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_gc7pu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_oqjh4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_08na1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c4kbl"]
+radius = 29.0
+height = 126.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_gj47h"]
 font_color = Color(0, 0, 0, 1)
@@ -2778,17 +2847,22 @@ autoplay = "mover"
 position = Vector2(-6, -106)
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+z_index = -1
 position = Vector2(-214, 99)
 script = ExtResource("5_a430x")
 SnowballScene = ExtResource("6_43bxu")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-scale = Vector2(0.4326425, 0.43333334)
-texture = ExtResource("7_u17ge")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(5.5000024, -23.000008)
+scale = Vector2(0.8773583, 0.92105263)
+sprite_frames = SubResource("SpriteFrames_13alt")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.5662062
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_hhlyv")
+position = Vector2(7, -18)
+shape = SubResource("CapsuleShape2D_c4kbl")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
