@@ -12,7 +12,7 @@ func _ready():
 
 func _on_jugar_pressed():
 	# CAMBIA "res://world.tscn" POR LA RUTA DE TU NIVEL DE JUEGO
-	get_tree().change_scene_to_file("res://Escenas/escena1_main.tscn")
+	get_tree().change_scene_to_file("res://Escenas/tutorial.tscn")
 	
 func _on_creditos_pressed():
 	# CAMBIA "res://world.tscn" POR LA RUTA DE TU NIVEL DE JUEGO
