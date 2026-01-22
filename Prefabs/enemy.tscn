@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://celr34lxtrdk4"]
+[gd_scene load_steps=9 format=3 uid="uid://celr34lxtrdk4"]
 
 [ext_resource type="Script" uid="uid://dxwrkha2imbth" path="res://Scripts/enemy.gd" id="1_n7q57"]
 [ext_resource type="Texture2D" uid="uid://dmi3bkcvtgkrg" path="res://Assets/kenney_new-platformer-pack-1.1/Sprites/Enemies/Default/slime_fire_walk_a.png" id="2_80imi"]
@@ -33,6 +33,9 @@ animations = [{
 radius = 20.996277
 height = 53.99243
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_n7q57"]
+radius = 12.239995
+
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_n7q57")
 rango_patruya = 300.0
@@ -46,3 +49,10 @@ autoplay = "walk"
 position = Vector2(0, 10)
 rotation = -1.567179
 shape = SubResource("CapsuleShape2D_bm2cm")
+
+[node name="DetectorJugador" type="Area2D" parent="."]
+scale = Vector2(2.8400002, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorJugador"]
+scale = Vector2(7.6, 3.6)
+shape = SubResource("CircleShape2D_n7q57")
